@@ -1,0 +1,40 @@
+body{
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    height: 100vh;
+    background-color: black;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+h1{
+    text-align: center;
+}
+#dialog{
+    background-color: gray;
+    border: solid 6px greenyellow;
+    border-radius: 8px;
+    height: 400px;
+    width: 500px;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+}
+#start-button{
+    height: 40px;
+    width: 240px;
+    border-radius: 5px;
+    font-weight: bold;
+    border: 2px solid black;
+    color: black;
+    background-color: greenyellow;
+}
+#game-screen{
+    color: white;
+    display: none;
+}
+#game-grid{
+    height: 500px;
+    width: 500px;
+    background-color: aquamarine;
+}
+
