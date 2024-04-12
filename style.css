@@ -35,6 +35,21 @@ h1{
 #game-grid{
     height: 500px;
     width: 500px;
-    background-color: aquamarine;
+    background-color: yellow;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 50px);
 }
 
+.unrevealed{
+
+    background-color: aquamarine;
+    border: 2px solid red;
+}
+.revealed {
+    background-color: blue;
+}
+.bomb {
+    
+    background: url("https://e7.pngegg.com/pngimages/858/591/png-clipart-gray-spiked-ball-art-microsoft-minesweeper-minesweeper-classic-the-minesweeper-naval-mine-mines-game-symmetry-thumbnail.png");
+    background-size: contain;
+}
