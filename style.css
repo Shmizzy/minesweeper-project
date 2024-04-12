@@ -19,7 +19,26 @@ h1{
     align-content: center;
     justify-content: center;
 }
+.end-dialog{
+    background-color: gray;
+    border: solid 6px greenyellow;
+    border-radius: 8px;
+    height: 400px;
+    width: 500px;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+}
 #start-button{
+    height: 40px;
+    width: 240px;
+    border-radius: 5px;
+    font-weight: bold;
+    border: 2px solid black;
+    color: black;
+    background-color: greenyellow;
+}
+.end-button{
     height: 40px;
     width: 240px;
     border-radius: 5px;
@@ -37,19 +56,25 @@ h1{
     width: 500px;
     background-color: yellow;
     display: grid;
-    grid-template-columns: repeat(auto-fill, 50px);
+    grid-template-columns: repeat(10, 50px);
+    grid-template-rows: repeat(10, 50px);
 }
 
 .unrevealed{
 
     background-color: aquamarine;
-    border: 2px solid red;
+    border: 1px solid navajowhite;
 }
 .revealed {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: blue;
+  
 }
 .bomb {
-    
+    border: 2px solid navajowhite;
+    background-color: red;
     background: url("https://e7.pngegg.com/pngimages/858/591/png-clipart-gray-spiked-ball-art-microsoft-minesweeper-minesweeper-classic-the-minesweeper-naval-mine-mines-game-symmetry-thumbnail.png");
     background-size: contain;
 }
