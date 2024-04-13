@@ -1,4 +1,5 @@
-
+const button = document.querySelector('#start-button');
+const gameGrid = document.getElementById('game-grid');
 
 let gridArray = [];
 const adjLocations = [
@@ -7,14 +8,45 @@ const adjLocations = [
     {adjX: 1, adjY: -1}, {adjX: 1, adjY: 0}, {adjX: 1, adjY: 1},
 ]
 
-const button = document.querySelector('#start-button');
-const gameGrid = document.getElementById('game-grid');
+
+
+
+
+//    ------------------FUNCTIONS----------------
 
 button.addEventListener('click', ()=> startGame());
 
+
+const startGame = () => {
+
+    document.getElementById('dialog').style.display = 'none';
+    
+    generateGrid();
+}
+
+const endGame = () =>{
+
+    const gameDiv = document.getElementById('game-screen');
+    const endDialog = document.getElementById('end-dialog');
+    const restartButton = document.getElementById('restart-button');
+
+    endDialog.style.display = 'grid';
+    gameDiv.style.display = 'none';
+
+    restartButton.addEventListener('click', ()=>{
+        endDialog.style.display = 'none';
+        gameGrid.innerHTML = '';
+        gridArray = [];
+        startGame();
+    });
+
+}
+
+
 const generateGrid = () => {
-  
-    document.getElementById('game-screen').style.display = 'grid'
+
+      document.getElementById('game-screen').style.display = 'grid'
+
     for(let i = 0; i < 10; i++){
         gridArray[i] = []
         for(let j = 0; j < 10; j++){
@@ -70,7 +102,6 @@ const reveal = (x,y) => {
             grabTile.classList.replace('unrevealed','bomb');
             gridArray[x][y].isRevealed = true;
             revealAllBombs();
-           
         }
     }
     
@@ -109,37 +140,9 @@ const revealAllBombs = () => {
             
         }
     }
+    endGame();
 }
 
 
-const startGame = () => {
 
-    document.getElementById('dialog').style.display = 'none';
-    
-    generateGrid();
-}
 
-const endGame = () =>{
-    document.getElementById('game-screen').style.display = 'none'
-    const body = document.querySelector('body');
-    const endDiv = document.createElement('div');
-    const gameOver = document.createElement('h1');
-    const playAgain = document.createElement('button');
-    endDiv.classList.add('end-dialog');
-    playAgain.classList.add('end-button');
-
-    gameOver.textContent = "Game Over!!!"
-    playAgain.textContent = "Play Again???"
-
-    playAgain.addEventListener('click', ()=>{
-        endDiv.style.display = 'none';
-        gameGrid.innerHTML = '';
-        gridArray = [];
-        startGame();
-    });
-
-    
-    endDiv.appendChild(gameOver);
-    endDiv.appendChild(playAgain);
-    body.appendChild(endDiv);
-}
