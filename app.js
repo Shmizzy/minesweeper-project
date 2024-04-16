@@ -1,9 +1,10 @@
 const startButton = document.querySelector('#start-button');
+const scoresElement = document.getElementById('scores');
 const dialogElement = document.getElementById('dialog');
 const gameElement = document.getElementById('game-screen');
 const gridElement = document.querySelector('.game-grid');
-let newGrid
 
+let score = 0;
 let scoresList = [];
 let totalGamesStarted = [];
 const adjLocations = [
@@ -75,6 +76,7 @@ const reveal = (x,y) => {
         if(grabMainArray[x][y].isBomb === false){
             grabTile.classList.replace('unrevealed','revealed');
             grabMainArray[x][y].isRevealed = true;
+            score += 50;
             const bombCount = checkAdjacentTiles(x,y);
             if(bombCount !== 0){
                 grabTile.innerHTML = bombCount;
@@ -89,13 +91,26 @@ const reveal = (x,y) => {
                 }
             }
         }else {
-            revealAll();
+            scoresList.push(score);
+            score = 0;
+            function compareNumbers(a, b) {
+                return b - a;
+              }
+            const newScoresElement = document.createElement('div');
+            newScoresElement.style.color = 'black';
+            newScoresElement.style.textAlign = 'center';
+            console.log(scoresList);
+            for(let i = 0; i < scoresList.length; i++){   
+                newScoresElement.innerHTML =`${i+1}. ${scoresList[i]}` ;
+                scoresElement.appendChild(newScoresElement);
+            }
 
-           
+            revealAll();
         }
     }
     
 }
+
 
 
 const checkAdjacentTiles = (x,y) => {
@@ -163,3 +178,5 @@ const revealAll = () => {
         }
     }
 }
+
+
