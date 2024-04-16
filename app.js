@@ -1,7 +1,8 @@
 const startButton = document.querySelector('#start-button');
 const dialogElement = document.getElementById('dialog');
 const gameElement = document.getElementById('game-screen');
-const gridElement = document.getElementById('game-grid');
+const gridElement = document.querySelector('.game-grid');
+let newGrid
 
 let scoresList = [];
 let totalGamesStarted = [];
@@ -20,7 +21,7 @@ const startGame = () => {
     dialogElement.style.display = 'none';
     gameElement.style.display = 'grid';
     generateGrid();
-
+    
     
 
 }
@@ -30,6 +31,7 @@ const startGame = () => {
 
 const generateGrid = () => {
     let grid = [];
+    const grabLastTile = document.querySelector(`.unrevealed[data-xy="9,9"]`);
     for(let i = 0; i < 10; i++){
         grid.push([]);
         for(let j = 0; j < 10; j++){
@@ -43,8 +45,12 @@ const generateGrid = () => {
                 isBomb: false
             };
             gridElement.appendChild(tile);
+            
+            
             tile.addEventListener('click', () => reveal(i,j));
-        }
+          }
+            
+        
     }
     
     for(let bomb = 0; bomb <= 20; bomb++){
@@ -84,6 +90,7 @@ const reveal = (x,y) => {
             }
         }else {
             revealAll();
+
            
         }
     }
@@ -112,12 +119,41 @@ const checkAdjacentTiles = (x,y) => {
 
 const revealAll = () => { 
 
+    let timesRestarted = 0;
     const grabMainArray = totalGamesStarted[0];
+    const restartButton = document.createElement('button');
+    restartButton.innerHTML = 'Play Again!'
+    restartButton.classList.add("restart-button");
+    restartButton.addEventListener('click' ,() => {
+        totalGamesStarted.pop();
+        gameElement.removeChild(restartButton);
+        for(let i = 0; i < 10; i++){
+            for(let j = 0; j < 10; j++){
+                grabMainArray[i][j].isRevealed = false;
+                grabTile = document.querySelector(`.revealed[data-xy="${i},${j}"]`)
+                if(grabTile || grabMainArray[i][j].isBomb){
+                    if(grabMainArray[i][j].isBomb){
+                        grabTile = document.querySelector(`.bomb[data-xy="${i},${j}"]`)
+                        grabTile.classList.replace('bomb','unrevealed');
+                        grabTile.innerHTML = '';
+                    }
+                    grabTile.classList.replace('revealed','unrevealed');
+                    grabTile.innerHTML = '';
+                }
+                
+                
+            }
+        }
+        generateGrid();
+        timesRestarted++;
+    })
     
     for(let i = 0; i < 10; i++){
         for(let j = 0; j < 10; j++){
             grabMainArray[i][j].isRevealed = true;
             grabTile = document.querySelector(`.unrevealed[data-xy="${i},${j}"]`)
+            gameElement.appendChild(restartButton);
+
             if(grabTile){
                 if(grabMainArray[i][j].isBomb){
                     grabTile.classList.replace('unrevealed','bomb')

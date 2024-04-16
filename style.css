@@ -20,7 +20,7 @@ h1{
     align-content: center;
     justify-content: center;
 }
-#start-button, #restart-button{
+#start-button, .restart-button{
     height: 40px;
     width: 240px;
     border-radius: 5px;
@@ -29,6 +29,9 @@ h1{
     color: black;
     background-color: greenyellow;
     justify-self: center;
+}
+.restart-button{
+    margin-top: 10px;
 }
 
 #end-dialog{
@@ -41,14 +44,16 @@ h1{
 #game-screen{
     color: white;
     display: none;
+    grid-template-rows:75px 500px 75px;
 }
-#game-grid{
+.game-grid{
     height: 500px;
     width: 500px;
     background-color: yellow;
     display: grid;
     grid-template-columns: repeat(10, 50px);
     grid-template-rows: repeat(10, 50px);
+    overflow: hidden;
 }
 
 .unrevealed{
