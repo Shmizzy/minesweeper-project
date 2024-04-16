@@ -24,15 +24,12 @@ const startGame = () => {
     generateGrid();
     
     
-
 }
-
 
 
 
 const generateGrid = () => {
     let grid = [];
-    const grabLastTile = document.querySelector(`.unrevealed[data-xy="9,9"]`);
     for(let i = 0; i < 10; i++){
         grid.push([]);
         for(let j = 0; j < 10; j++){
@@ -46,12 +43,8 @@ const generateGrid = () => {
                 isBomb: false
             };
             gridElement.appendChild(tile);
-            
-            
             tile.addEventListener('click', () => reveal(i,j));
           }
-            
-        
     }
     
     for(let bomb = 0; bomb <= 20; bomb++){
@@ -73,7 +66,7 @@ const reveal = (x,y) => {
     const grabMainArray = totalGamesStarted[0];
     
     if(!grabMainArray[x][y].isRevealed){
-        if(grabMainArray[x][y].isBomb === false){
+        if(!grabMainArray[x][y].isBomb){
             grabTile.classList.replace('unrevealed','revealed');
             grabMainArray[x][y].isRevealed = true;
             score += 50;
@@ -93,9 +86,6 @@ const reveal = (x,y) => {
         }else {
             scoresList.push(score);
             score = 0;
-            function compareNumbers(a, b) {
-                return b - a;
-              }
             const newScoresElement = document.createElement('div');
             newScoresElement.style.color = 'black';
             newScoresElement.style.textAlign = 'center';
@@ -134,7 +124,6 @@ const checkAdjacentTiles = (x,y) => {
 
 const revealAll = () => { 
 
-    let timesRestarted = 0;
     const grabMainArray = totalGamesStarted[0];
     const restartButton = document.createElement('button');
     restartButton.innerHTML = 'Play Again!'
@@ -160,9 +149,10 @@ const revealAll = () => {
             }
         }
         generateGrid();
-        timesRestarted++;
     })
     
+
+    // THIS FIRST
     for(let i = 0; i < 10; i++){
         for(let j = 0; j < 10; j++){
             grabMainArray[i][j].isRevealed = true;
